@@ -1,13 +1,28 @@
 <div class="container">
-  <h1>Tweet Now! 2: Multi-User</h1>
+  <h1>Multiuser Tweet</h1>
 
-  <%
+<!--   <%
     # In our real-world application, this is not what we want. Instead, we should
     # be checking to see if there is currently a user logged-in, and if there is,
     # we should show her a form that will allow her to send a tweet. If there is no
     # user logged-in, we should show the sign-in button.
-  %>
-  <% if @access_token %>
+  %> -->
+  <!-- If current_user is not in session -->
+  <% if session[:current_user].nil? %>
+    <!-- Ask them to sign in -->
+    <button type="button"><a href="/sign_in"> Sign in to Twitter</a></button>
+  <!-- If current_user is in session -->
+  <% else %>
+    <h2> Make a Tweet! </h2>
+    <form action="/post_to_twitter" method="POST">
+      <input name="tweet" type="text" placeholder="Enter a Tweet">
+      <input type="submit" value="submit a tweet!">
+    </form>
+  <% end %>
+
+
+
+<!--   <% if @access_token %>
     <div>
       <p>
         <strong>token:</strong> <%= @access_token.token %><br>
@@ -19,6 +34,6 @@
     </div>
   <% else %>
     <button><a href="/sign_in">Sign In with Twitter</a></button>
-  <% end %>
+  <% end %> -->
   
 </div>
